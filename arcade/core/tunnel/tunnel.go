@@ -35,3 +35,19 @@ func magicalWell(a int, b int, n int) int {
 	}
 	return s
 }
+
+func countBlackCells(n int, m int) int {
+	cnt := 0
+	slope := float64(n) / float64(m)
+	for x := 0.0; x < float64(m); x++ {
+		for y := 0.0; y < float64(n); y++ {
+			v := x * slope
+			if v >= y && v <= (y+1) {
+				cnt++
+			} else if (y <= (v + slope)) && ((v + slope) <= (y + 1)) {
+				cnt++
+			}
+		}
+	}
+	return cnt
+}

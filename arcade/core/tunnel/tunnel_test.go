@@ -84,3 +84,39 @@ func Test_leastFactorial(t *testing.T) {
 		})
 	}
 }
+
+func Test_countBlackCells(t *testing.T) {
+	type args struct {
+		n int
+		m int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{"", args{3, 4}, 6},
+		{"", args{3, 3}, 7},
+		{"", args{2, 5}, 6},
+		{"", args{1, 1}, 1},
+		{"", args{1, 2}, 2},
+		{"", args{1, 3}, 3},
+		{"", args{1, 239}, 239},
+		{"", args{33, 44}, 86},
+		{"", args{16, 8}, 30},
+		{"", args{66666, 88888}, 177774},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := countBlackCells(tt.args.n, tt.args.m); got != tt.want {
+				t.Errorf("countBlackCells() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Benchmark_countBlackCells(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		countBlackCells(100, 200)
+	}
+}
